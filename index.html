@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Secure Enablement Hub</title>
+  <style>
+    :root {
+      --ink:#172033; --muted:#667085; --panel:rgba(255,255,255,.78);
+      --line:rgba(105,65,198,.16); --shadow:0 24px 70px rgba(57,29,105,.15);
+      --purple:#7147e8; --blue:#3977ff; --cyan:#18b8c9; --orange:#ff8a45;
+      --bg:linear-gradient(135deg,#f7f4ff 0%,#edf7ff 48%,#fff4eb 100%);
+    }
+    [data-theme="dark"] {
+      --ink:#f6f7fb; --muted:#b8bfd0; --panel:rgba(18,24,40,.78);
+      --line:rgba(190,170,255,.18); --shadow:0 24px 80px rgba(0,0,0,.38);
+      --bg:linear-gradient(135deg,#171026 0%,#0f1c33 52%,#27170f 100%);
+    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;background:var(--bg);min-height:100vh}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 8%,rgba(113,71,232,.18),transparent 28%),radial-gradient(circle at 88% 18%,rgba(24,184,201,.17),transparent 27%),radial-gradient(circle at 60% 92%,rgba(255,138,69,.16),transparent 25%)}
+    .shell{width:min(1160px,calc(100% - 32px));margin:auto;padding:28px 0 72px;position:relative}
+    .nav,.glass{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    .nav{position:sticky;top:14px;z-index:20;border-radius:18px;padding:10px 14px;display:flex;align-items:center;gap:12px}
+    .brand{font-weight:850;letter-spacing:-.02em;margin-right:auto}.brand span{background:linear-gradient(90deg,var(--purple),var(--blue),var(--cyan));-webkit-background-clip:text;color:transparent}
+    button,.button{border:0;border-radius:12px;padding:10px 14px;font:inherit;font-weight:750;cursor:pointer;text-decoration:none;color:white;background:linear-gradient(100deg,var(--purple),var(--blue));box-shadow:0 10px 24px rgba(75,72,220,.22);transition:.2s transform,.2s box-shadow}
+    button:hover,.button:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(75,72,220,.3)}
+    .ghost{color:var(--ink);background:transparent;box-shadow:none;border:1px solid var(--line)}
+    .hero{padding:80px 8px 46px;display:grid;grid-template-columns:1.35fr .65fr;gap:28px;align-items:center}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 11px;border-radius:99px;background:rgba(255,255,255,.48);border:1px solid var(--line);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+    h1{font-size:clamp(44px,7vw,82px);line-height:.96;letter-spacing:-.065em;margin:20px 0}
+    .gradient-text{background:linear-gradient(100deg,var(--purple),var(--blue) 48%,var(--cyan));-webkit-background-clip:text;color:transparent}
+    .lead{font-size:19px;color:var(--muted);max-width:720px}.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .orb{aspect-ratio:1;border-radius:42% 58% 62% 38%/45% 42% 58% 55%;background:linear-gradient(145deg,var(--purple),var(--blue),var(--cyan));animation:float 7s ease-in-out infinite;box-shadow:0 30px 80px rgba(66,88,220,.3);display:grid;place-items:center;color:white;font-size:72px}
+    @keyframes float{50%{transform:translateY(-14px) rotate(4deg);border-radius:58% 42% 38% 62%/55% 58% 42% 45%}}
+    .section{margin-top:38px}.section-head{display:flex;gap:18px;align-items:end;justify-content:space-between;margin-bottom:16px}.section h2{font-size:30px;letter-spacing:-.035em;margin:0}.section p{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:24px;border-radius:24px;position:relative;overflow:hidden;transition:.25s transform,.25s border-color}.card:hover{transform:translateY(-6px);border-color:rgba(113,71,232,.38)}
+    .card:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-70px;top:-70px;background:var(--glow,rgba(113,71,232,.15));filter:blur(4px)}
+    .icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,rgba(113,71,232,.17),rgba(57,119,255,.12))}.card h3{font-size:21px;margin:18px 0 6px}.card p{margin:0 0 18px}
+    .link{color:var(--purple);font-weight:800;text-decoration:none}.link:hover{text-decoration:underline}
+    .filter{width:min(440px,100%);padding:12px 15px;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:13px;outline:none}.filter:focus{border-color:var(--purple);box-shadow:0 0 0 4px rgba(113,71,232,.12)}
+    .resources{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.resource{display:flex;align-items:center;gap:13px;padding:15px 17px;border-radius:17px;text-decoration:none;color:var(--ink)}.resource:hover{border-color:rgba(113,71,232,.4)}.resource small{display:block;color:var(--muted)}
+    .decision{padding:28px;border-radius:26px;display:grid;grid-template-columns:1fr 1fr;gap:24px}.checklist{margin:0;padding-left:20px}.checklist li{margin:8px 0}
+    .footer{text-align:center;color:var(--muted);padding:52px 0 0}
+    .hidden{display:none!important}
+    @media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:54px}.orb{display:none}.grid{grid-template-columns:1fr}.resources,.decision{grid-template-columns:1fr}.nav .desktop{display:none}.section-head{align-items:start;flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <nav class="nav">
+      <div class="brand">✨ <span>AI Secure Enablement</span></div>
+      <a class="ghost button desktop" href="#resources">Resources</a>
+      <button class="ghost" id="theme" aria-label="Toggle theme">◐ Theme</button>
+    </nav>
+
+    <header class="hero">
+      <div>
+        <div class="eyebrow">🚧 Beta · Secure by design</div>
+        <h1>Move fast.<br><span class="gradient-text">Use AI safely.</span></h1>
+        <p class="lead">Your launchpad for approved AI tools, connectors, MCPs, APIs, agents, integrations, and automations.</p>
+        <div class="hero-actions">
+          <a class="button" href="#start">Choose your path</a>
+          <a class="button ghost" href="#decision">Do I need a review?</a>
+        </div>
+      </div>
+      <div class="orb" aria-hidden="true">🤖</div>
+    </header>
+
+    <section class="section" id="start">
+      <div class="section-head"><div><h2>Start here</h2><p>Pick the route that matches your goal.</p></div></div>
+      <div class="grid">
+        <article class="card glass" style="--glow:rgba(39,190,126,.18)"><div class="icon">🔎</div><h3>Can I use this?</h3><p>Check whether your tool and intended use are already approved.</p><a class="link" href="https://app.notion.com/p/bde97bd70bac836590b88135db3d8268">Browse approvals →</a></article>
+        <article class="card glass" style="--glow:rgba(255,138,69,.2)"><div class="icon">📝</div><h3>I need something new</h3><p>Submit a tool, connector, API, MCP, agent, or automation request.</p><a class="link" href="https://app.notion.com/p/66397bd70bac8215ae9101827d5a6302">Open request hub →</a></article>
+        <article class="card glass" style="--glow:rgba(113,71,232,.19)"><div class="icon">📍</div><h3>Track my request</h3><p>See your submissions, status, and next steps in one place.</p><a class="link" href="https://app.notion.com/p/bde97bd70bac836590b88135db3d8268">View status →</a></article>
+      </div>
+    </section>
+
+    <section class="section" id="decision">
+      <div class="decision glass">
+        <div><h2>Do I need a review?</h2><p>Submit a request when the idea introduces meaningful new access, data, vendors, or automation.</p><a class="link" href="https://app.notion.com/p/f8b97bd70bac8311bccf817a7b8f0ee9">Read the governance model →</a></div>
+        <ul class="checklist"><li>New vendor, AI tool, connector, MCP, API, or agent</li><li>Customer data, PII, source code, or federal data</li><li>Write, delete, share, or unattended actions</li><li>A wider audience or purpose than an existing approval</li></ul>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="section-head"><div><h2>Resource library</h2><p>Search secure-use and governance guidance.</p></div><input class="filter" id="filter" placeholder="Filter resources…" aria-label="Filter resources"></div>
+      <div class="resources" id="resourceList">
+        <a class="resource glass" data-tags="policy acceptable use" href="https://ontic.my.onetrust.com/enterprise-policy/policies/64961b5a-e6ad-4994-b9d6-d77de84c1e51/details"><span>📘</span><span><b>AI Acceptable Use Policy</b><small>Core policy</small></span></a>
+        <a class="resource glass" data-tags="notion guardrails best practices" href="https://app.notion.com/p/6eb97bd70bac82e3980301aafe0e02a0"><span>🛡️</span><span><b>Notion AI Guardrails</b><small>Secure-use guide</small></span></a>
+        <a class="resource glass" data-tags="api key keeper secrets" href="https://app.notion.com/p/64137e171af340af87bca74e626388f5"><span>🔑</span><span><b>API Key Best Practices</b><small>Keeper and secrets</small></span></a>
+        <a class="resource glass" data-tags="claude connectors secure" href="https://app.notion.com/p/d1797bd70bac83d3ac5a815cbe50f04f"><span>🔌</span><span><b>Claude Connectors</b><small>Secure-use guide</small></span></a>
+        <a class="resource glass" data-tags="mcp security privacy review" href="https://app.notion.com/p/ab797bd70bac82c5aabf810c46da93c7"><span>🧩</span><span><b>MCP Review Guide</b><small>Security and privacy</small></span></a>
+        <a class="resource glass" data-tags="governance risk model review" href="https://app.notion.com/p/f8b97bd70bac8311bccf817a7b8f0ee9"><span>🏛️</span><span><b>Governance & Risk Model</b><small>Routing reference</small></span></a>
+      </div>
+    </section>
+
+    <footer class="footer">Built for secure enablement · Contact Joshua Botz for urgent routing questions.</footer>
+  </main>
+  <script>
+    const root=document.documentElement;
+    const saved=localStorage.getItem('ai-hub-theme');
+    if(saved) root.dataset.theme=saved;
+    document.getElementById('theme').addEventListener('click',()=>{
+      const next=root.dataset.theme==='dark'?'light':'dark';
+      root.dataset.theme=next; localStorage.setItem('ai-hub-theme',next);
+    });
+    document.getElementById('filter').addEventListener('input',e=>{
+      const q=e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.resource').forEach(item=>{
+        item.classList.toggle('hidden',!(`${item.textContent} ${item.dataset.tags}`).toLowerCase().includes(q));
+      });
+    });
+  </script>
+</body>
+</html>
